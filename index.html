@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Festival Teater Modern Pelajar se-NTB tahun 2025</title>
+    <title>Festival Teater Modern Pelajar se-NTB tahun 2025 - PENDAFTARAN DITUTUP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -98,6 +98,39 @@
             font-size: 0.875rem;
             margin-top: 0.25rem;
         }
+
+        .disabled-overlay {
+            position: relative;
+        }
+
+        .disabled-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(2px);
+            border-radius: 1rem;
+            z-index: 10;
+        }
+
+        .disabled-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            font-weight: bold;
+            font-size: 1.25rem;
+            z-index: 11;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+        }
     </style>
 </head>
 <body class="gradient-bg">
@@ -107,7 +140,7 @@
             <div class="flex flex-col sm:flex-row items-center justify-center text-center">
                 <div>
                     <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800">Festival Teater Modern Pelajar</h1>
-                    <p class="text-sm sm:text-base text-gray-600">se-NTB tahun 2025</p>
+                    <p class="text-sm sm:text-base text-gray-600">se-NTB tahun 2025 - <span class="text-red-600 font-bold">PENDAFTARAN DITUTUP</span></p>
                 </div>
             </div>
         </div>
@@ -124,6 +157,10 @@
                         <div class="text-center mb-8">
                             <h2 id="authTitle" class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Masuk ke Akun</h2>
                             <p class="text-gray-600">Kelola pendaftaran festival teater</p>
+                            <div class="mt-4 bg-red-50 border border-red-200 rounded-xl p-4">
+                                <p class="text-red-700 font-semibold">⚠️ PENDAFTARAN SUDAH DITUTUP</p>
+                                <p class="text-red-600 text-sm mt-1">Registrasi akun baru tidak tersedia. Hanya login untuk melihat data.</p>
+                            </div>
                         </div>
                         
                         <!-- Login Form -->
@@ -141,27 +178,30 @@
                             </button>
                         </form>
 
-                        <!-- Register Form -->
-                        <form id="registerForm" class="space-y-6 hidden">
+                        <!-- Register Form - DISABLED -->
+                        <form id="registerForm" class="space-y-6 hidden disabled-overlay">
+                            <div class="disabled-text">
+                                PENDAFTARAN DITUTUP
+                            </div>
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-3">Username</label>
                                 <input type="text" id="regUsername" class="w-full px-4 py-4 rounded-xl input-modern" 
-                                       maxlength="7" pattern="[a-zA-Z0-9]+" required>
+                                       maxlength="7" pattern="[a-zA-Z0-9]+" required disabled>
                                 <div id="usernameError" class="error-text hidden">Username maksimal 7 karakter, hanya huruf dan angka</div>
                                 <div id="usernameSuccess" class="success-text hidden">Username valid ✓</div>
                             </div>
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-3">Password (Huruf & Angka)</label>
-                                <input type="password" id="regPassword" class="w-full px-4 py-4 rounded-xl input-modern" required>
+                                <input type="password" id="regPassword" class="w-full px-4 py-4 rounded-xl input-modern" required disabled>
                             </div>
-                            <button type="submit" class="w-full btn-secondary text-white py-4 rounded-xl font-semibold text-lg">
-                                Buat Akun
+                            <button type="submit" class="w-full bg-gray-400 text-white py-4 rounded-xl font-semibold text-lg cursor-not-allowed" disabled>
+                Pendaftaran Ditutup
                             </button>
                         </form>
 
                         <div class="text-center mt-8">
-                            <button id="toggleAuth" class="text-purple-600 hover:text-purple-800 font-semibold transition-colors">
-                                Belum punya akun? Daftar di sini
+                            <button id="toggleAuth" class="text-gray-400 cursor-not-allowed font-semibold transition-colors" disabled>
+                                Pendaftaran akun baru sudah ditutup
                             </button>
                         </div>
                     </div>
@@ -175,6 +215,9 @@
                         <div>
                             <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Dashboard</h2>
                             <p id="welcomeUser" class="text-gray-600"></p>
+                            <div class="mt-2 bg-yellow-50 border border-yellow-200 rounded-xl p-3 inline-block">
+                                <p class="text-yellow-700 text-sm">📢 <strong>Mode View Only:</strong> Data tidak dapat diubah</p>
+                            </div>
                         </div>
                         <button id="logoutBtn" class="mt-4 sm:mt-0 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl font-semibold transition-all hover:transform hover:-translate-y-1">
                             Keluar
@@ -201,22 +244,22 @@
                         <button id="schoolDataBtn" class="card-hover bg-gradient-to-br from-blue-500 to-blue-600 text-white p-8 rounded-2xl text-left group">
                             <div class="text-4xl mb-4">📚</div>
                             <h3 class="text-xl font-bold mb-3">Data Sekolah</h3>
-                            <p class="text-blue-100 group-hover:text-white transition-colors">Kelola informasi sekolah dan sanggar</p>
+                            <p class="text-blue-100 group-hover:text-white transition-colors">Lihat informasi sekolah dan sanggar</p>
                         </button>
                         <button id="registrationBtn" class="card-hover bg-gradient-to-br from-green-500 to-green-600 text-white p-8 rounded-2xl text-left group">
                             <div class="text-4xl mb-4">👥</div>
                             <h3 class="text-xl font-bold mb-3">Registrasi Peserta</h3>
-                            <p class="text-green-100 group-hover:text-white transition-colors">Daftarkan peserta festival</p>
+                            <p class="text-green-100 group-hover:text-white transition-colors">Lihat peserta yang sudah terdaftar</p>
                         </button>
                         <button id="paymentBtn" class="card-hover bg-gradient-to-br from-orange-500 to-orange-600 text-white p-8 rounded-2xl text-left group">
                             <div class="text-4xl mb-4">💰</div>
-                            <h3 class="text-xl font-bold mb-3">Selesaikan Pendaftaran</h3>
-                            <p class="text-orange-100 group-hover:text-white transition-colors">Upload bukti pembayaran</p>
+                            <h3 class="text-xl font-bold mb-3">Status Pembayaran</h3>
+                            <p class="text-orange-100 group-hover:text-white transition-colors">Lihat status pembayaran</p>
                         </button>
                         <button id="checkParticipantsBtn" class="card-hover bg-gradient-to-br from-purple-500 to-purple-600 text-white p-8 rounded-2xl text-left group">
                             <div class="text-4xl mb-4">📋</div>
                             <h3 class="text-xl font-bold mb-3">Cek Peserta Terdaftar</h3>
-                            <p class="text-purple-100 group-hover:text-white transition-colors">Lihat dan kelola peserta yang sudah terdaftar</p>
+                            <p class="text-purple-100 group-hover:text-white transition-colors">Lihat peserta yang sudah terdaftar</p>
                         </button>
                     </div>
                 </div>
@@ -224,11 +267,15 @@
 
             <!-- School Data Form -->
             <div id="schoolDataSection" class="hidden animate-fadeInUp">
-                <div class="glass-card rounded-2xl p-6 sm:p-8">
+                <div class="glass-card rounded-2xl p-6 sm:p-8 disabled-overlay">
+                    <div class="disabled-text">
+                        DATA TIDAK DAPAT DIUBAH<br>
+                        <span class="text-sm font-normal">Pendaftaran sudah ditutup</span>
+                    </div>
                     <div class="flex flex-col sm:flex-row justify-between items-center mb-8">
                         <div>
                             <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">📚 Data Sekolah</h2>
-                            <p class="text-gray-600">Lengkapi informasi sekolah dan sanggar</p>
+                            <p class="text-gray-600">Lihat informasi sekolah dan sanggar</p>
                         </div>
                         <button id="backToDashboard1" class="mt-4 sm:mt-0 bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-xl font-semibold transition-all hover:transform hover:-translate-y-1">
                             Kembali
@@ -239,79 +286,51 @@
                         <div class="grid sm:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-3">Nama Sekolah</label>
-                                <input type="text" id="schoolName" class="w-full px-4 py-4 rounded-xl input-modern" required>
+                                <input type="text" id="schoolName" class="w-full px-4 py-4 rounded-xl bg-gray-100 text-gray-600" readonly>
                             </div>
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-3">Nama Sanggar</label>
-                                <input type="text" id="sanggarName" class="w-full px-4 py-4 rounded-xl input-modern" required>
+                                <input type="text" id="sanggarName" class="w-full px-4 py-4 rounded-xl bg-gray-100 text-gray-600" readonly>
                             </div>
                         </div>
                         
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-3">Unggah Naskah</label>
-                            <input type="file" id="scriptFile" class="w-full px-4 py-4 rounded-xl input-modern" accept=".pdf,.doc,.docx" required>
-                            <p class="text-sm text-gray-500 mt-2">📁 Format: PDF, DOC, DOCX | 
-                                <a href="https://docs.google.com/document/d/17fUA1-8vSAoO4UuY87LsViasCWoEs8la/edit?usp=sharing&ouid=85008&rtpof=true&sd=true" 
-                                   target="_blank" class="text-blue-600 hover:underline font-medium">📥 Unduh Contoh</a>
-                            </p>
+                            <input type="text" class="w-full px-4 py-4 rounded-xl bg-gray-100 text-gray-600" value="File sudah diupload (tidak dapat diubah)" readonly>
                         </div>
                         
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-3">Unggah Plot Lampu</label>
-                            <input type="file" id="lightPlotFile" class="w-full px-4 py-4 rounded-xl input-modern" accept=".pdf,.jpg,.jpeg,.png" required>
-                            <p class="text-sm text-gray-500 mt-2">💡 Format: PDF, JPG, PNG | 
-                                <a href="https://drive.google.com/drive/folders/1-y_A2OWNYamNVl-ntztamXkzvRPtQyr7?usp=sharing" 
-                                   target="_blank" class="text-blue-600 hover:underline font-medium">📥 Unduh Contoh</a>
-                            </p>
+                            <input type="text" class="w-full px-4 py-4 rounded-xl bg-gray-100 text-gray-600" value="File sudah diupload (tidak dapat diubah)" readonly>
                         </div>
                         
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-3">Unggah Poster Pertunjukan</label>
-                            <input type="file" id="posterFile" class="w-full px-4 py-4 rounded-xl input-modern" accept=".jpg,.jpeg,.png,.pdf" required>
-                            <p class="text-sm text-gray-500 mt-2">🎨 Format: JPG, PNG, PDF | 
-                                <a href="https://drive.google.com/file/d/1NqYdT8R6I9eSKp7Ag8SjWdLeoQsnX-0p/view?usp=drive_link" 
-                                   target="_blank" class="text-blue-600 hover:underline font-medium">📥 Unduh Contoh</a>
-                            </p>
+                            <input type="text" class="w-full px-4 py-4 rounded-xl bg-gray-100 text-gray-600" value="File sudah diupload (tidak dapat diubah)" readonly>
                         </div>
                         
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-3">Unggah Artistik</label>
-                            <input type="file" id="artisticFile" class="w-full px-4 py-4 rounded-xl input-modern" accept=".jpg,.jpeg,.png,.pdf" required>
-                            <p class="text-sm text-gray-500 mt-2">🎨 Format: JPG, PNG, PDF | 
-                                <a href="https://drive.google.com/file/d/1OUf5Ql3Y-IAVXMKxDVNBTbUe2gBf8zjR/view?usp=drive_link" 
-                                   target="_blank" class="text-blue-600 hover:underline font-medium">📥 Unduh Contoh</a>
-                            </p>
+                            <input type="text" class="w-full px-4 py-4 rounded-xl bg-gray-100 text-gray-600" value="File sudah diupload (tidak dapat diubah)" readonly>
                         </div>
                         
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-3">Unggah Sinopsis</label>
-                            <input type="file" id="synopsisFile" class="w-full px-4 py-4 rounded-xl input-modern" accept=".pdf,.doc,.docx" required>
-                            <p class="text-sm text-gray-500 mt-2">📖 Format: PDF, DOC, DOCX</p>
+                            <input type="text" class="w-full px-4 py-4 rounded-xl bg-gray-100 text-gray-600" value="File sudah diupload (tidak dapat diubah)" readonly>
                         </div>
                         
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-3">Unggah Profil Sanggar</label>
-                            <input type="file" id="profileFile" class="w-full px-4 py-4 rounded-xl input-modern" accept=".pdf,.doc,.docx" required>
-                            <p class="text-sm text-gray-500 mt-2">🏛️ Format: PDF, DOC, DOCX</p>
+                            <input type="text" class="w-full px-4 py-4 rounded-xl bg-gray-100 text-gray-600" value="File sudah diupload (tidak dapat diubah)" readonly>
                         </div>
                         
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-3">Kontak Pembina</label>
-                            <input type="tel" id="supervisorContact" class="w-full px-4 py-4 rounded-xl input-modern" 
-                                   placeholder="Contoh: 08123456789" required>
-                            <p class="text-sm text-gray-500 mt-2">📱 Nomor WhatsApp pembina yang bisa dihubungi</p>
+                            <input type="text" id="supervisorContact" class="w-full px-4 py-4 rounded-xl bg-gray-100 text-gray-600" readonly>
                         </div>
                         
-                        <!-- Upload Progress -->
-                        <div id="uploadProgress" class="hidden">
-                            <div class="bg-gray-200 rounded-full h-3 mb-4">
-                                <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full transition-all duration-300" style="width: 0%"></div>
-                            </div>
-                            <p id="uploadStatus" class="text-center text-gray-600 text-sm">Mengunggah file...</p>
-                        </div>
-                        
-                        <button type="submit" id="saveSchoolBtn" class="w-full btn-primary text-white py-4 rounded-xl font-semibold text-lg">
-                            Simpan Data Sekolah
+                        <button type="button" class="w-full bg-gray-400 text-white py-4 rounded-xl font-semibold text-lg cursor-not-allowed" disabled>
+                            Data Tidak Dapat Diubah (Pendaftaran Ditutup)
                         </button>
                     </form>
                 </div>
@@ -323,7 +342,10 @@
                     <div class="flex flex-col sm:flex-row justify-between items-center mb-8">
                         <div>
                             <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">📋 Peserta Terdaftar</h2>
-                            <p class="text-gray-600">Kelola peserta yang sudah terdaftar</p>
+                            <p class="text-gray-600">Lihat peserta yang sudah terdaftar</p>
+                            <div class="mt-2 bg-yellow-50 border border-yellow-200 rounded-xl p-3 inline-block">
+                                <p class="text-yellow-700 text-sm">📢 Data peserta tidak dapat diubah atau dihapus</p>
+                            </div>
                         </div>
                         <button id="backToDashboard3" class="mt-4 sm:mt-0 bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-xl font-semibold transition-all hover:transform hover:-translate-y-1">
                             Kembali
@@ -341,9 +363,6 @@
                         <div class="text-6xl mb-4">👥</div>
                         <h3 class="text-xl font-bold text-gray-800 mb-2">Belum Ada Peserta</h3>
                         <p class="text-gray-600 mb-6">Belum ada peserta yang terdaftar untuk sekolah Anda</p>
-                        <button onclick="showSection('registration')" class="btn-secondary text-white px-6 py-3 rounded-xl font-semibold">
-                            Daftarkan Peserta Pertama
-                        </button>
                     </div>
                     
                     <!-- Participants List -->
@@ -353,83 +372,29 @@
                 </div>
             </div>
 
-            <!-- Edit Participant Modal -->
+            <!-- Edit Participant Modal - DISABLED -->
             <div id="editParticipantModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 hidden">
                 <div class="flex items-center justify-center min-h-screen p-4">
-                    <div class="glass-card rounded-2xl p-6 sm:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto">
+                    <div class="glass-card rounded-2xl p-6 sm:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto disabled-overlay">
+                        <div class="disabled-text">
+                            EDIT DITUTUP
+                        </div>
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="text-xl font-bold text-gray-800">✏️ Edit Peserta</h3>
                             <button id="closeEditModal" class="text-gray-500 hover:text-gray-700 text-2xl">×</button>
                         </div>
                         
-                        <form id="editParticipantForm" class="space-y-4">
-                            <input type="hidden" id="editParticipantId">
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Peserta (sesuai ijazah)</label>
-                                <input type="text" id="editParticipantName" class="w-full px-4 py-3 rounded-xl input-modern" required>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">Sebagai</label>
-                                <select id="editParticipantRole" class="w-full px-4 py-3 rounded-xl input-modern" required>
-                                    <option value="">Pilih Peran</option>
-                                    <option value="aktor utama">🎭 Aktor Utama</option>
-                                    <option value="aktor pembantu">🎭 Aktor Pembantu</option>
-                                    <option value="aktris utama">🎭 Aktris Utama</option>
-                                    <option value="aktris pembantu">🎭 Aktris Pembantu</option>
-                                    <option value="penata music">🎵 Penata Music</option>
-                                    <option value="tim artistic">🎨 Tim Artistic</option>
-                                    <option value="sutradara">🎬 Sutradara</option>
-                                    <option value="pembina">👨‍🏫 Pembina</option>
-                                    <option value="penata lampu">💡 Penata Lampu</option>
-                                    <option value="pubdok">📢 Pubdok</option>
-                                    <option value="stage manager">🎪 Stage Manager</option>
-                                    <option value="pelatih">🏃‍♂️ Pelatih</option>
-                                </select>
-                            </div>
-                            <div id="editCharacterNameDiv" class="hidden">
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Tokoh</label>
-                                <input type="text" id="editCharacterName" class="w-full px-4 py-3 rounded-xl input-modern">
-                            </div>
-                            
-                            <!-- Common Fields for Edit -->
-                            <div id="editCommonFieldsDiv" class="hidden space-y-4">
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Jenis Kelamin</label>
-                                    <select id="editGender" class="w-full px-4 py-3 rounded-xl input-modern" required>
-                                        <option value="">Pilih Jenis Kelamin</option>
-                                        <option value="Laki-laki">👨 Laki-laki</option>
-                                        <option value="Perempuan">👩 Perempuan</option>
-                                    </select>
-                                </div>
-                                
-                                <div id="editStudentCardDiv">
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Unggah Kartu Pelajar Baru (Opsional)</label>
-                                    <input type="file" id="editStudentCardFile" class="w-full px-4 py-3 rounded-xl input-modern" accept=".jpg,.jpeg,.png,.pdf">
-                                    <p class="text-sm text-gray-500 mt-1">🆔 Kosongkan jika tidak ingin mengubah kartu pelajar</p>
-                                </div>
-                                
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Unggah Foto 3x4 Baru (Opsional)</label>
-                                    <input type="file" id="editPhotoFile" class="w-full px-4 py-3 rounded-xl input-modern" accept=".jpg,.jpeg,.png">
-                                    <p class="text-sm text-gray-500 mt-1">📷 Kosongkan jika tidak ingin mengubah foto</p>
-                                </div>
-                                
-                                <div>
-                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Penyakit Bawaan</label>
-                                    <textarea id="editMedicalCondition" class="w-full px-4 py-3 rounded-xl input-modern" rows="3" placeholder="Tuliskan penyakit bawaan atau kondisi kesehatan khusus. Jika tidak ada, tulis 'Tidak ada'"></textarea>
-                                </div>
-                            </div>
-                            
-
-                            <div class="flex gap-3 pt-4">
-                                <button type="button" id="cancelEdit" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-xl font-semibold">
-                                    Batal
-                                </button>
-                                <button type="submit" class="flex-1 btn-primary text-white py-3 rounded-xl font-semibold">
-                                    Simpan
-                                </button>
-                            </div>
-                        </form>
+                        <div class="text-center py-8">
+                            <div class="text-4xl mb-4">🚫</div>
+                            <h4 class="text-lg font-bold text-gray-800 mb-2">Edit Tidak Tersedia</h4>
+                            <p class="text-gray-600">Pendaftaran sudah ditutup. Data peserta tidak dapat diubah.</p>
+                        </div>
+                        
+                        <div class="flex gap-3 pt-4">
+                            <button id="cancelEdit" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-xl font-semibold">
+                                Tutup
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -439,8 +404,11 @@
                 <div class="glass-card rounded-2xl p-6 sm:p-8">
                     <div class="flex flex-col sm:flex-row justify-between items-center mb-8">
                         <div>
-                            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">💰 Selesaikan Pendaftaran</h2>
-                            <p class="text-gray-600">Upload bukti pembayaran untuk menyelesaikan pendaftaran</p>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">💰 Status Pembayaran</h2>
+                            <p class="text-gray-600">Lihat status pembayaran pendaftaran</p>
+                            <div class="mt-2 bg-yellow-50 border border-yellow-200 rounded-xl p-3 inline-block">
+                                <p class="text-yellow-700 text-sm">📢 Upload bukti pembayaran sudah ditutup</p>
+                            </div>
                         </div>
                         <button id="backToDashboard4" class="mt-4 sm:mt-0 bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-xl font-semibold transition-all hover:transform hover:-translate-y-1">
                             Kembali
@@ -493,113 +461,39 @@
                         <!-- Will be populated by JavaScript -->
                     </div>
                     
-                    <!-- Payment Upload Form -->
-                    <form id="paymentForm" class="space-y-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Upload Bukti Pembayaran</label>
-                            <input type="file" id="paymentProofFile" class="w-full px-4 py-4 rounded-xl input-modern" accept=".jpg,.jpeg,.png,.pdf" required>
-                            <p class="text-sm text-gray-500 mt-2">📄 Format: JPG, PNG, PDF | Foto struk transfer atau bukti pembayaran</p>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Catatan Tambahan (Opsional)</label>
-                            <textarea id="paymentNotes" class="w-full px-4 py-4 rounded-xl input-modern" rows="3" placeholder="Tambahkan catatan jika diperlukan, misalnya metode pembayaran atau informasi lainnya"></textarea>
-                        </div>
-                        
-                        <button type="submit" id="submitPaymentBtn" class="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white py-4 rounded-xl font-semibold text-lg transition-all hover:transform hover:-translate-y-1">
-                            Upload Bukti Pembayaran
-                        </button>
-                    </form>
+                    <!-- Payment Upload Form - DISABLED -->
+                    <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 text-center">
+                        <div class="text-4xl mb-4">🔒</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Upload Bukti Pembayaran Ditutup</h3>
+                        <p class="text-gray-600">Periode upload bukti pembayaran sudah berakhir.</p>
+                    </div>
                 </div>
             </div>
 
             <!-- Registration Form -->
             <div id="registrationSection" class="hidden animate-fadeInUp">
-                <div class="glass-card rounded-2xl p-6 sm:p-8">
+                <div class="glass-card rounded-2xl p-6 sm:p-8 disabled-overlay">
+                    <div class="disabled-text">
+                        PENDAFTARAN PESERTA DITUTUP
+                    </div>
                     <div class="flex flex-col sm:flex-row justify-between items-center mb-8">
                         <div>
-                            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">👥 Registrasi Peserta</h2>
-                            <p class="text-gray-600">Daftarkan peserta untuk festival teater</p>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">👥 Data Peserta Terdaftar</h2>
+                            <p class="text-gray-600">Lihat peserta yang sudah terdaftar</p>
                         </div>
                         <button id="backToDashboard2" class="mt-4 sm:mt-0 bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-xl font-semibold transition-all hover:transform hover:-translate-y-1">
                             Kembali
                         </button>
                     </div>
                     
-                    <form id="participantForm" class="space-y-6">
-                        <div class="grid sm:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-3">Nama Peserta (sesuai ijazah)</label>
-                                <input type="text" id="participantName" class="w-full px-4 py-4 rounded-xl input-modern" required>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-3">Nama Sekolah</label>
-                                <input type="text" id="participantSchool" class="w-full px-4 py-4 rounded-xl bg-gray-100 text-gray-600" readonly>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Sebagai</label>
-                            <select id="participantRole" class="w-full px-4 py-4 rounded-xl input-modern" required>
-                                <option value="">Pilih Peran</option>
-                                <option value="aktor utama">🎭 Aktor Utama</option>
-                                <option value="aktor pembantu">🎭 Aktor Pembantu</option>
-                                <option value="aktris utama">🎭 Aktris Utama</option>
-                                <option value="aktris pembantu">🎭 Aktris Pembantu</option>
-                                <option value="penata music">🎵 Penata Music</option>
-                                <option value="tim artistic">🎨 Tim Artistic</option>
-                                <option value="sutradara">🎬 Sutradara</option>
-                                <option value="pembina">👨‍🏫 Pembina</option>
-                                <option value="penata lampu">💡 Penata Lampu</option>
-                                <option value="pubdok">📢 Pubdok</option>
-                                <option value="stage manager">🎪 Stage Manager</option>
-                                <option value="pelatih">🏃‍♂️ Pelatih</option>
-                            </select>
-                        </div>
-                        
-                        <!-- Fields for Pemain -->
-                        <div id="characterNameDiv" class="hidden">
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Nama Tokoh</label>
-                            <input type="text" id="characterName" class="w-full px-4 py-4 rounded-xl input-modern">
-                            <p class="text-sm text-gray-500 mt-2">🎭 Nama karakter yang akan diperankan</p>
-                        </div>
-                        
-                        <!-- Common Fields -->
-                        <div id="commonFieldsDiv" class="hidden space-y-6">
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-3">Jenis Kelamin</label>
-                                <select id="gender" class="w-full px-4 py-4 rounded-xl input-modern" required>
-                                    <option value="">Pilih Jenis Kelamin</option>
-                                    <option value="Laki-laki">👨 Laki-laki</option>
-                                    <option value="Perempuan">👩 Perempuan</option>
-                                </select>
-                            </div>
-                            
-                            <div id="studentCardDiv">
-                                <label class="block text-sm font-semibold text-gray-700 mb-3">Unggah Kartu Pelajar</label>
-                                <input type="file" id="studentCardFile" class="w-full px-4 py-4 rounded-xl input-modern" accept=".jpg,.jpeg,.png,.pdf" required>
-                                <p class="text-sm text-gray-500 mt-2">🆔 Format: JPG, PNG, PDF | Kartu pelajar yang masih berlaku</p>
-                            </div>
-                            
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-3">Unggah Foto 3x4</label>
-                                <input type="file" id="photoFile" class="w-full px-4 py-4 rounded-xl input-modern" accept=".jpg,.jpeg,.png" required>
-                                <p class="text-sm text-gray-500 mt-2">📷 Format: JPG, PNG | Foto 3x4 terbaru</p>
-                            </div>
-                            
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-3">Penyakit Bawaan</label>
-                                <textarea id="medicalCondition" class="w-full px-4 py-4 rounded-xl input-modern" rows="3" placeholder="Tuliskan penyakit bawaan atau kondisi kesehatan khusus. Jika tidak ada, tulis 'Tidak ada'"></textarea>
-                                <p class="text-sm text-gray-500 mt-2">🏥 Informasi penting untuk keselamatan peserta</p>
-                            </div>
-                        </div>
-                        
-
-                        
-                        <button type="submit" class="w-full btn-secondary text-white py-4 rounded-xl font-semibold text-lg">
-                            Daftarkan Peserta
+                    <div class="text-center py-12">
+                        <div class="text-6xl mb-4">🔒</div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Pendaftaran Peserta Ditutup</h3>
+                        <p class="text-gray-600 mb-6">Periode pendaftaran peserta sudah berakhir. Data tidak dapat ditambah atau diubah.</p>
+                        <button onclick="showSection('checkParticipants')" class="btn-primary text-white px-6 py-3 rounded-xl font-semibold">
+                            Lihat Daftar Peserta
                         </button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -608,7 +502,7 @@
     <!-- Footer -->
     <footer class="bg-gray-900/90 backdrop-blur-md text-white py-8">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h3 class="text-xl font-bold mb-2">Festival Teater Modern Pelajar se-NTB tahun 2025</h3>
+            <h3 class="text-xl font-bold mb-2">Festival Teater Modern Pelajar se-NTB tahun 2025 - <span class="text-red-400">PENDAFTARAN DITUTUP</span></h3>
         </div>
     </footer>
 
@@ -629,6 +523,7 @@
         let currentUser = null;
         let schoolData = {};
         const API_URL = 'https://script.google.com/macros/s/AKfycbz2cN7ea4Mb7gNdpd0M4iS-at6drcMWnmt1d0Unlcu4oGWiI6immglM2qYc0_pYetMY/exec';
+        const REGISTRATION_CLOSED = true; // Flag untuk menandai pendaftaran ditutup
 
         // DOM elements
         const authSection = document.getElementById('authSection');
@@ -646,6 +541,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             checkLoginStatus();
             setupEventListeners();
+            
+            // Nonaktifkan toggle auth jika pendaftaran ditutup
+            if (REGISTRATION_CLOSED) {
+                toggleAuth.disabled = true;
+                toggleAuth.classList.add('cursor-not-allowed', 'text-gray-400');
+                toggleAuth.textContent = 'Pendaftaran akun baru sudah ditutup';
+            }
         });
 
         // Make functions globally accessible for onclick handlers
@@ -653,23 +555,13 @@
         window.deleteParticipant = deleteParticipant;
 
         function setupEventListeners() {
-            // Auth toggle
-            toggleAuth.addEventListener('click', toggleAuthMode);
-            
-            // Username validation
-            document.getElementById('regUsername').addEventListener('input', validateUsername);
-            
             // Forms
             loginForm.addEventListener('submit', handleLogin);
-            registerForm.addEventListener('submit', handleRegister);
-            document.getElementById('schoolForm').addEventListener('submit', handleSchoolData);
-            document.getElementById('participantForm').addEventListener('submit', handleParticipantRegistration);
-            document.getElementById('paymentForm').addEventListener('submit', handlePaymentSubmission);
             
             // Navigation
             document.getElementById('logoutBtn').addEventListener('click', handleLogout);
             document.getElementById('schoolDataBtn').addEventListener('click', () => showSection('schoolData'));
-            document.getElementById('registrationBtn').addEventListener('click', () => showSection('registration'));
+            document.getElementById('registrationBtn').addEventListener('click', () => showSection('checkParticipants')); // Redirect ke check participants
             document.getElementById('paymentBtn').addEventListener('click', () => showSection('payment'));
             document.getElementById('checkParticipantsBtn').addEventListener('click', () => showSection('checkParticipants'));
             document.getElementById('backToDashboard1').addEventListener('click', () => showSection('dashboard'));
@@ -677,38 +569,17 @@
             document.getElementById('backToDashboard3').addEventListener('click', () => showSection('dashboard'));
             document.getElementById('backToDashboard4').addEventListener('click', () => showSection('dashboard'));
             
-            // Role selection
-            document.getElementById('participantRole').addEventListener('change', handleRoleChange);
-            document.getElementById('editParticipantRole').addEventListener('change', handleEditRoleChange);
-            
             // Modal controls
             document.getElementById('closeEditModal').addEventListener('click', closeEditModal);
             document.getElementById('cancelEdit').addEventListener('click', closeEditModal);
-            document.getElementById('editParticipantForm').addEventListener('submit', handleEditParticipant);
-        }
-
-        function validateUsername() {
-            const username = document.getElementById('regUsername').value;
-            const errorDiv = document.getElementById('usernameError');
-            const successDiv = document.getElementById('usernameSuccess');
-            const regex = /^[a-zA-Z0-9]+$/;
-            
-            if (username.length > 7 || !regex.test(username)) {
-                errorDiv.classList.remove('hidden');
-                successDiv.classList.add('hidden');
-                return false;
-            } else if (username.length > 0) {
-                errorDiv.classList.add('hidden');
-                successDiv.classList.remove('hidden');
-                return true;
-            } else {
-                errorDiv.classList.add('hidden');
-                successDiv.classList.add('hidden');
-                return false;
-            }
         }
 
         function toggleAuthMode() {
+            if (REGISTRATION_CLOSED) {
+                showToast('Pendaftaran akun baru sudah ditutup', 'error');
+                return;
+            }
+            
             const isLogin = !loginForm.classList.contains('hidden');
             
             if (isLogin) {
@@ -747,12 +618,12 @@
                 if (result.success) {
                     currentUser = username;
                     localStorage.setItem('currentUser', username);
-                    localStorage.setItem('userPassword', password); // Simpan password untuk data sekolah
+                    localStorage.setItem('userPassword', password);
                     if (result.schoolData) {
                         schoolData = result.schoolData;
                     }
                     showSection('dashboard');
-                    showToast('Login berhasil!', 'success');
+                    showToast('Login berhasil! Mode view only', 'success');
                 } else {
                     showToast(result.message || 'Login gagal!', 'error');
                 }
@@ -762,361 +633,38 @@
         }
 
         async function handleRegister(e) {
-            e.preventDefault();
-            const username = document.getElementById('regUsername').value;
-            const password = document.getElementById('regPassword').value;
-            
-            if (!validateUsername()) {
-                showToast('Username tidak valid!', 'error');
+            if (REGISTRATION_CLOSED) {
+                e.preventDefault();
+                showToast('Pendaftaran akun baru sudah ditutup', 'error');
                 return;
             }
-            
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
-                    body: JSON.stringify({
-                        action: 'register',
-                        username: username,
-                        password: password,
-                        createSheet: true // Flag untuk membuat sheet baru
-                    })
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    showToast('Akun berhasil dibuat! Silakan login.', 'success');
-                    toggleAuthMode();
-                    document.getElementById('regUsername').value = '';
-                    document.getElementById('regPassword').value = '';
-                    document.getElementById('usernameError').classList.add('hidden');
-                    document.getElementById('usernameSuccess').classList.add('hidden');
-                } else {
-                    showToast(result.message || 'Registrasi gagal!', 'error');
-                }
-            } catch (error) {
-                showToast('Terjadi kesalahan saat registrasi', 'error');
-            }
+            // Kode registrasi lama di sini (tidak akan dijalankan karena REGISTRATION_CLOSED = true)
         }
 
         async function handleSchoolData(e) {
-            e.preventDefault();
-            const schoolName = document.getElementById('schoolName').value;
-            const saveBtn = document.getElementById('saveSchoolBtn');
-            const uploadProgress = document.getElementById('uploadProgress');
-            const progressBar = document.getElementById('progressBar');
-            const uploadStatus = document.getElementById('uploadStatus');
-            
-            // Get all files
-            const files = {
-                scriptFile: document.getElementById('scriptFile').files[0],
-                lightPlotFile: document.getElementById('lightPlotFile').files[0],
-                posterFile: document.getElementById('posterFile').files[0],
-                artisticFile: document.getElementById('artisticFile').files[0],
-                synopsisFile: document.getElementById('synopsisFile').files[0],
-                profileFile: document.getElementById('profileFile').files[0]
-            };
-            
-            // Validate files
-            for (const [key, file] of Object.entries(files)) {
-                if (!file) {
-                    showToast(`Harap pilih file untuk ${key.replace('File', '')}`, 'error');
-                    return;
-                }
+            if (REGISTRATION_CLOSED) {
+                e.preventDefault();
+                showToast('Data tidak dapat diubah - Pendaftaran sudah ditutup', 'error');
+                return;
             }
-            
-            // Show progress and disable button
-            saveBtn.disabled = true;
-            saveBtn.textContent = 'Mengunggah...';
-            uploadProgress.classList.remove('hidden');
-            
-            try {
-                // Convert files to base64 and upload one by one
-                const fileData = {};
-                const fileNames = Object.keys(files);
-                let uploadedCount = 0;
-                
-                for (const [key, file] of Object.entries(files)) {
-                    uploadStatus.textContent = `Mengunggah ${key.replace('File', '')}...`;
-                    
-                    // Convert to base64
-                    const base64 = await fileToBase64(file);
-                    
-                    // Upload file
-                    const uploadResponse = await fetch(API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain;charset=utf-8'
-                        },
-                        body: JSON.stringify({
-                            action: 'uploadFile',
-                            username: currentUser,
-                            folderName: schoolName,
-                            fileName: `${key.replace('File', '')}_${file.name}`,
-                            fileData: base64,
-                            mimeType: file.type
-                        })
-                    });
-                    
-                    const uploadResult = await uploadResponse.json();
-                    
-                    if (uploadResult.success) {
-                        fileData[key.replace('File', 'Link')] = uploadResult.fileUrl;
-                        uploadedCount++;
-                        
-                        // Update progress
-                        const progress = (uploadedCount / fileNames.length) * 80; // 80% for file uploads
-                        progressBar.style.width = `${progress}%`;
-                    } else {
-                        throw new Error(`Gagal mengunggah ${key}: ${uploadResult.message}`);
-                    }
-                }
-                
-                // Save school data
-                uploadStatus.textContent = 'Menyimpan data sekolah...';
-                progressBar.style.width = '90%';
-                
-                const formData = {
-                    action: 'saveSchoolData',
-                    username: currentUser,
-                    password: localStorage.getItem('userPassword') || '',
-                    schoolName: schoolName,
-                    sanggarName: document.getElementById('sanggarName').value,
-                    supervisorContact: document.getElementById('supervisorContact').value,
-                    saveToSharedSheet: true,
-                    createDriveFolder: true,
-                    folderName: schoolName,
-                    ...fileData // Include all uploaded file URLs
-                };
-                
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
-                    body: JSON.stringify(formData)
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    schoolData = formData;
-                    progressBar.style.width = '100%';
-                    uploadStatus.textContent = 'Selesai!';
-                    
-                    let message = 'Data sekolah dan file berhasil disimpan!';
-                    if (result.folderUrl) {
-                        message += ` Folder Google Drive "${schoolName}" telah dibuat.`;
-                        schoolData.driveFolder = result.folderUrl;
-                    }
-                    
-                    setTimeout(() => {
-                        showToast(message, 'success');
-                        uploadProgress.classList.add('hidden');
-                        progressBar.style.width = '0%';
-                    }, 1000);
-                } else {
-                    throw new Error(result.message || 'Gagal menyimpan data sekolah!');
-                }
-            } catch (error) {
-                showToast(error.message || 'Terjadi kesalahan saat menyimpan data', 'error');
-                uploadProgress.classList.add('hidden');
-                progressBar.style.width = '0%';
-            } finally {
-                saveBtn.disabled = false;
-                saveBtn.textContent = 'Simpan Data Sekolah';
-            }
-        }
-        
-        // Helper function to convert file to base64
-        function fileToBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => {
-                    // Remove the data:mime;base64, prefix
-                    const base64 = reader.result.split(',')[1];
-                    resolve(base64);
-                };
-                reader.onerror = error => reject(error);
-            });
+            // Kode school data lama di sini
         }
 
         async function handleParticipantRegistration(e) {
-            e.preventDefault();
-            const role = document.getElementById('participantRole').value;
-            const characterName = document.getElementById('characterName').value;
-            const participantName = document.getElementById('participantName').value;
-            const schoolName = schoolData.schoolName || '';
-            
-            // Get files
-            const studentCardFile = document.getElementById('studentCardFile').files[0];
-            const photoFile = document.getElementById('photoFile').files[0];
-            
-            // Validate required files
-            if (!photoFile) {
-                showToast('Harap pilih foto 3x4!', 'error');
+            if (REGISTRATION_CLOSED) {
+                e.preventDefault();
+                showToast('Pendaftaran peserta sudah ditutup', 'error');
                 return;
             }
-            
-            if ((role !== 'pembina' && role !== 'pelatih') && !studentCardFile) {
-                showToast('Harap pilih kartu pelajar!', 'error');
-                return;
-            }
-            
-            try {
-                // Show loading state
-                const submitBtn = e.target.querySelector('button[type="submit"]');
-                const originalText = submitBtn.textContent;
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Mengunggah file...';
-                
-                let studentCardLink = '';
-                let photoLink = '';
-                
-                // Upload student card if required
-                if (studentCardFile) {
-                    const studentCardBase64 = await fileToBase64(studentCardFile);
-                    const studentCardResponse = await fetch(API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain;charset=utf-8'
-                        },
-                        body: JSON.stringify({
-                            action: 'uploadFile',
-                            username: currentUser,
-                            folderName: schoolName,
-                            fileName: `${schoolName}_${participantName}_KartuPelajar.${studentCardFile.name.split('.').pop()}`,
-                            fileData: studentCardBase64,
-                            mimeType: studentCardFile.type
-                        })
-                    });
-                    
-                    const studentCardResult = await studentCardResponse.json();
-                    if (!studentCardResult.success) {
-                        throw new Error('Gagal mengunggah kartu pelajar');
-                    }
-                    studentCardLink = studentCardResult.fileUrl;
-                }
-                
-                // Upload photo
-                const photoBase64 = await fileToBase64(photoFile);
-                const photoResponse = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
-                    body: JSON.stringify({
-                        action: 'uploadFile',
-                        username: currentUser,
-                        folderName: schoolName,
-                        fileName: `${schoolName}_${participantName}_Foto.${photoFile.name.split('.').pop()}`,
-                        fileData: photoBase64,
-                        mimeType: photoFile.type
-                    })
-                });
-                
-                const photoResult = await photoResponse.json();
-                if (!photoResult.success) {
-                    throw new Error('Gagal mengunggah foto');
-                }
-                photoLink = photoResult.fileUrl;
-                
-                // Register participant with file URLs
-                submitBtn.textContent = 'Menyimpan data...';
-                
-                const formData = {
-                    action: 'registerParticipant',
-                    username: currentUser,
-                    participantName: participantName,
-                    schoolName: schoolName,
-                    role: role,
-                    characterName: (role === 'aktor utama' || role === 'aktor pembantu' || role === 'aktris utama' || role === 'aktris pembantu') ? characterName : '',
-                    gender: document.getElementById('gender').value,
-                    studentCardLink: studentCardLink,
-                    photoLink: photoLink,
-                    medicalCondition: document.getElementById('medicalCondition').value,
-                    writeToUserSheet: true
-                };
-                
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
-                    body: JSON.stringify(formData)
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    showToast('Peserta berhasil didaftarkan!', 'success');
-                    document.getElementById('participantForm').reset();
-                    document.getElementById('participantSchool').value = schoolName;
-                    document.getElementById('characterNameDiv').classList.add('hidden');
-                    document.getElementById('commonFieldsDiv').classList.add('hidden');
-                } else {
-                    showToast(result.message || 'Gagal mendaftarkan peserta!', 'error');
-                }
-                
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-                
-            } catch (error) {
-                showToast(error.message || 'Terjadi kesalahan saat mendaftarkan peserta', 'error');
-                const submitBtn = e.target.querySelector('button[type="submit"]');
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Daftarkan Peserta';
-            }
+            // Kode participant registration lama di sini
         }
 
         function handleRoleChange() {
-            const role = document.getElementById('participantRole').value;
-            const characterNameDiv = document.getElementById('characterNameDiv');
-            const commonFieldsDiv = document.getElementById('commonFieldsDiv');
-            const studentCardDiv = document.getElementById('studentCardDiv');
-            const studentCardInput = document.getElementById('studentCardLink');
-            
-            if (role) {
-                // Show common fields for all roles
-                commonFieldsDiv.classList.remove('hidden');
-                
-                if (role === 'aktor utama' || role === 'aktor pembantu' || role === 'aktris utama' || role === 'aktris pembantu') {
-                    // Show character name for actor/actress roles
-                    characterNameDiv.classList.remove('hidden');
-                    document.getElementById('characterName').required = true;
-                    
-                    // Show student card for actor/actress roles
-                    studentCardDiv.classList.remove('hidden');
-                    document.getElementById('studentCardFile').required = true;
-                } else {
-                    // Hide character name for non-actor roles
-                    characterNameDiv.classList.add('hidden');
-                    document.getElementById('characterName').required = false;
-                    document.getElementById('characterName').value = '';
-                    
-                    // Check if role needs student card
-                    if (role === 'pembina' || role === 'pelatih') {
-                        // Hide student card for pembina and pelatih
-                        studentCardDiv.classList.add('hidden');
-                        document.getElementById('studentCardFile').required = false;
-                        document.getElementById('studentCardFile').value = '';
-                    } else {
-                        // Show student card for other roles
-                        studentCardDiv.classList.remove('hidden');
-                        document.getElementById('studentCardFile').required = true;
-                    }
-                }
-            } else {
-                // Hide all additional fields if no role selected
-                characterNameDiv.classList.add('hidden');
-                commonFieldsDiv.classList.add('hidden');
-                document.getElementById('characterName').required = false;
-                document.getElementById('studentCardFile').required = false;
+            if (REGISTRATION_CLOSED) {
+                showToast('Pendaftaran peserta sudah ditutup', 'error');
+                return;
             }
+            // Kode role change lama di sini
         }
 
         function showSection(section) {
@@ -1136,7 +684,7 @@
                         break;
                     case 'dashboard':
                         dashboardSection.classList.remove('hidden');
-                        document.getElementById('welcomeUser').textContent = `Selamat datang, ${currentUser}! 👋`;
+                        document.getElementById('welcomeUser').textContent = `Selamat datang, ${currentUser}! 👋 (View Only)`;
                         loadPaymentStatus();
                         break;
                     case 'schoolData':
@@ -1144,13 +692,8 @@
                         loadSchoolData();
                         break;
                     case 'registration':
-                        if (!schoolData.schoolName) {
-                            showToast('Harap isi data sekolah terlebih dahulu!', 'error');
-                            showSection('schoolData');
-                            return;
-                        }
-                        registrationSection.classList.remove('hidden');
-                        document.getElementById('participantSchool').value = schoolData.schoolName;
+                        // Redirect ke check participants karena pendaftaran ditutup
+                        showSection('checkParticipants');
                         break;
                     case 'payment':
                         paymentSection.classList.remove('hidden');
@@ -1190,40 +733,225 @@
         }
 
         function updatePaymentStatusDisplay(status) {
-            const statusCard = document.getElementById('paymentStatusCard');
-            const statusText = document.getElementById('paymentStatusText');
-            const statusBadge = document.getElementById('paymentStatusBadge');
+            const card = document.getElementById('paymentStatusCard');
+            const badge = document.getElementById('paymentStatusBadge');
+            const text = document.getElementById('paymentStatusText');
             
-            switch(status) {
-                case 'lunas':
-                    statusCard.style.borderLeftColor = '#10b981';
-                    statusText.textContent = 'Pembayaran telah lunas dan terverifikasi';
-                    statusBadge.textContent = 'LUNAS';
-                    statusBadge.className = 'px-4 py-2 rounded-full text-sm font-semibold bg-green-100 text-green-800';
-                    break;
-                case 'pending':
-                    statusCard.style.borderLeftColor = '#f59e0b';
-                    statusText.textContent = 'Bukti pembayaran sedang diverifikasi';
-                    statusBadge.textContent = 'PENDING';
-                    statusBadge.className = 'px-4 py-2 rounded-full text-sm font-semibold bg-yellow-100 text-yellow-800';
-                    break;
-                case 'ditolak':
-                    statusCard.style.borderLeftColor = '#ef4444';
-                    statusText.textContent = 'Bukti pembayaran ditolak, silakan upload ulang';
-                    statusBadge.textContent = 'DITOLAK';
-                    statusBadge.className = 'px-4 py-2 rounded-full text-sm font-semibold bg-red-100 text-red-800';
-                    break;
-                default:
-                    statusCard.style.borderLeftColor = '#6b7280';
-                    statusText.textContent = 'Belum melakukan pembayaran';
-                    statusBadge.textContent = 'BELUM BAYAR';
-                    statusBadge.className = 'px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-800';
+            let statusConfig = {
+                'belum_bayar': {
+                    badge: 'bg-red-100 text-red-800',
+                    text: 'Menunggu pembayaran',
+                    border: '#ef4444',
+                    icon: '⏳'
+                },
+                'menunggu_verifikasi': {
+                    badge: 'bg-yellow-100 text-yellow-800',
+                    text: 'Menunggu verifikasi',
+                    border: '#f59e0b',
+                    icon: '⏳'
+                },
+                'terverifikasi': {
+                    badge: 'bg-green-100 text-green-800',
+                    text: 'Pembayaran terverifikasi',
+                    border: '#10b981',
+                    icon: '✅'
+                },
+                'ditolak': {
+                    badge: 'bg-red-100 text-red-800',
+                    text: 'Pembayaran ditolak',
+                    border: '#ef4444',
+                    icon: '❌'
+                }
+            };
+            
+            const config = statusConfig[status] || statusConfig['belum_bayar'];
+            
+            card.style.borderLeftColor = config.border;
+            badge.className = `px-4 py-2 rounded-full text-sm font-semibold ${config.badge}`;
+            badge.textContent = config.text;
+            text.innerHTML = `${config.icon} Status: ${config.text}`;
+        }
+
+        function checkLoginStatus() {
+            const savedUser = localStorage.getItem('currentUser');
+            const savedPassword = localStorage.getItem('userPassword');
+            
+            if (savedUser && savedPassword) {
+                currentUser = savedUser;
+                showSection('dashboard');
+            } else {
+                showSection('auth');
             }
         }
 
-        async function loadCurrentPaymentStatus() {
-            const currentStatusDiv = document.getElementById('currentPaymentStatus');
+        function handleLogout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('userPassword');
+            showSection('auth');
+            showToast('Anda telah keluar', 'info');
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
             
+            const icons = {
+                success: '✅',
+                error: '❌',
+                warning: '⚠️',
+                info: 'ℹ️'
+            };
+            
+            const colors = {
+                success: 'text-green-600',
+                error: 'text-red-600',
+                warning: 'text-yellow-600',
+                info: 'text-blue-600'
+            };
+            
+            toastIcon.textContent = icons[type] || icons.info;
+            toastIcon.className = `text-2xl mr-3 ${colors[type] || colors.info}`;
+            toastMessage.textContent = message;
+            
+            toast.classList.remove('translate-x-full');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 3000);
+        }
+
+        function closeEditModal() {
+            document.getElementById('editParticipantModal').classList.add('hidden');
+        }
+
+        // Fungsi-fungsi yang tidak lagi digunakan karena pendaftaran ditutup
+        function editParticipant(index) {
+            if (REGISTRATION_CLOSED) {
+                showToast('Edit peserta tidak tersedia - Pendaftaran sudah ditutup', 'error');
+                return;
+            }
+            // Kode edit participant lama di sini
+        }
+
+        function deleteParticipant(index) {
+            if (REGISTRATION_CLOSED) {
+                showToast('Hapus peserta tidak tersedia - Pendaftaran sudah ditutup', 'error');
+                return;
+            }
+            // Kode delete participant lama di sini
+        }
+
+        async function loadSchoolData() {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8'
+                    },
+                    body: JSON.stringify({
+                        action: 'getSchoolData',
+                        username: currentUser
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success && result.data) {
+                    const data = result.data;
+                    document.getElementById('schoolName').value = data.schoolName || '';
+                    document.getElementById('sanggarName').value = data.sanggarName || '';
+                    document.getElementById('supervisorContact').value = data.supervisorContact || '';
+                }
+            } catch (error) {
+                showToast('Gagal memuat data sekolah', 'error');
+            }
+        }
+
+        async function loadParticipants() {
+            const loading = document.getElementById('participantsLoading');
+            const empty = document.getElementById('participantsEmpty');
+            const list = document.getElementById('participantsList');
+            
+            loading.classList.remove('hidden');
+            empty.classList.add('hidden');
+            list.classList.add('hidden');
+            
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8'
+                    },
+                    body: JSON.stringify({
+                        action: 'getParticipants',
+                        username: currentUser
+                    })
+                });
+                
+                const result = await response.json();
+                
+                loading.classList.add('hidden');
+                
+                if (result.success && result.participants && result.participants.length > 0) {
+                    displayParticipants(result.participants);
+                    list.classList.remove('hidden');
+                } else {
+                    empty.classList.remove('hidden');
+                }
+            } catch (error) {
+                loading.classList.add('hidden');
+                showToast('Gagal memuat data peserta', 'error');
+            }
+        }
+
+        function displayParticipants(participants) {
+            const container = document.getElementById('participantsList');
+            container.innerHTML = '';
+            
+            participants.forEach((participant, index) => {
+                const participantCard = document.createElement('div');
+                participantCard.className = 'glass-card rounded-2xl p-6 card-hover';
+                participantCard.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">${participant.name || 'Nama tidak tersedia'}</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600">
+                                <div><strong>NISN:</strong> ${participant.nisn || '-'}</div>
+                                <div><strong>Kelas:</strong> ${participant.grade || '-'}</div>
+                                <div><strong>Jenis Kelamin:</strong> ${participant.gender === 'L' ? 'Laki-laki' : 'Perempuan'}</div>
+                                <div><strong>Peran:</strong> ${getRoleDisplayName(participant.role)}</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 ml-4">
+                            <button onclick="editParticipant(${index})" class="bg-gray-400 text-white px-4 py-2 rounded-lg font-semibold cursor-not-allowed" disabled>
+                                Edit
+                            </button>
+                            <button onclick="deleteParticipant(${index})" class="bg-gray-400 text-white px-4 py-2 rounded-lg font-semibold cursor-not-allowed" disabled>
+                                Hapus
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(participantCard);
+            });
+        }
+
+        function getRoleDisplayName(role) {
+            const roles = {
+                'aktor': 'Aktor',
+                'sutradara': 'Sutradara',
+                'penulis_naskah': 'Penulis Naskah',
+                'penata_artistik': 'Penata Artistik',
+                'penata_cahaya': 'Penata Cahaya',
+                'penata_musik': 'Penata Musik',
+                'crew': 'Crew Panggung'
+            };
+            return roles[role] || role;
+        }
+
+        async function loadCurrentPaymentStatus() {
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
@@ -1237,614 +965,94 @@
                 });
                 
                 const result = await response.json();
-                const status = result.success ? (result.paymentStatus || 'belum_bayar') : 'belum_bayar';
                 
-                let statusHTML = '';
+                const container = document.getElementById('currentPaymentStatus');
                 
-                switch(status) {
-                    case 'lunas':
-                        statusHTML = `
-                            <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+                if (result.success) {
+                    const status = result.paymentStatus || 'belum_bayar';
+                    const statusText = getPaymentStatusText(status);
+                    
+                    container.innerHTML = `
+                        <div class="glass-card rounded-2xl p-6 border-l-4" style="border-left-color: ${getStatusColor(status)};">
+                            <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-4">
-                                    <div class="text-3xl">✅</div>
+                                    <div class="text-3xl">${getStatusIcon(status)}</div>
                                     <div>
-                                        <h3 class="text-lg font-bold text-green-800">Pembayaran Lunas</h3>
-                                        <p class="text-green-700">Pembayaran Anda telah terverifikasi dan lunas. Pendaftaran selesai!</p>
+                                        <h3 class="text-lg font-bold text-gray-800">Status Pembayaran Saat Ini</h3>
+                                        <p class="text-sm text-gray-600">${statusText}</p>
                                     </div>
                                 </div>
-                            </div>
-                        `;
-                        document.getElementById('paymentForm').style.display = 'none';
-                        break;
-                    case 'pending':
-                        statusHTML = `
-                            <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
-                                <div class="flex items-center gap-4">
-                                    <div class="text-3xl">⏳</div>
-                                    <div>
-                                        <h3 class="text-lg font-bold text-yellow-800">Menunggu Verifikasi</h3>
-                                        <p class="text-yellow-700">Bukti pembayaran Anda sedang diverifikasi. Mohon tunggu konfirmasi.</p>
-                                        ${result.paymentProofLink ? `<p class="text-sm mt-2"><a href="${result.paymentProofLink}" target="_blank" class="text-blue-600 hover:underline">📄 Lihat bukti pembayaran yang diupload</a></p>` : ''}
-                                    </div>
+                                <div class="px-4 py-2 rounded-full text-sm font-semibold ${getStatusBadgeClass(status)}">
+                                    ${getStatusBadgeText(status)}
                                 </div>
                             </div>
-                        `;
-                        document.getElementById('paymentForm').style.display = 'block';
-                        document.getElementById('submitPaymentBtn').textContent = 'Upload Ulang Bukti Pembayaran';
-                        break;
-                    case 'ditolak':
-                        statusHTML = `
-                            <div class="bg-red-50 border border-red-200 rounded-xl p-6">
-                                <div class="flex items-center gap-4">
-                                    <div class="text-3xl">❌</div>
-                                    <div>
-                                        <h3 class="text-lg font-bold text-red-800">Bukti Pembayaran Ditolak</h3>
-                                        <p class="text-red-700">Bukti pembayaran tidak valid. Silakan upload bukti pembayaran yang benar.</p>
-                                        ${result.rejectionNote ? `<p class="text-sm mt-2 text-red-600"><strong>Catatan:</strong> ${result.rejectionNote}</p>` : ''}
-                                    </div>
-                                </div>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = `
+                        <div class="glass-card rounded-2xl p-6 border-l-4 border-red-500">
+                            <div class="text-center text-gray-600">
+                                <p>Gagal memuat status pembayaran</p>
                             </div>
-                        `;
-                        document.getElementById('paymentForm').style.display = 'block';
-                        document.getElementById('submitPaymentBtn').textContent = 'Upload Ulang Bukti Pembayaran';
-                        break;
-                    default:
-                        statusHTML = `
-                            <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
-                                <div class="flex items-center gap-4">
-                                    <div class="text-3xl">💳</div>
-                                    <div>
-                                        <h3 class="text-lg font-bold text-gray-800">Belum Melakukan Pembayaran</h3>
-                                        <p class="text-gray-700">Silakan lakukan pembayaran dan upload bukti pembayaran untuk menyelesaikan pendaftaran.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        document.getElementById('paymentForm').style.display = 'block';
-                        document.getElementById('submitPaymentBtn').textContent = 'Upload Bukti Pembayaran';
+                        </div>
+                    `;
                 }
-                
-                currentStatusDiv.innerHTML = statusHTML;
-                
             } catch (error) {
-                currentStatusDiv.innerHTML = `
-                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
-                        <div class="flex items-center gap-4">
-                            <div class="text-3xl">💳</div>
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-800">Belum Melakukan Pembayaran</h3>
-                                <p class="text-gray-700">Silakan lakukan pembayaran dan upload bukti pembayaran untuk menyelesaikan pendaftaran.</p>
-                            </div>
+                document.getElementById('currentPaymentStatus').innerHTML = `
+                    <div class="glass-card rounded-2xl p-6 border-l-4 border-red-500">
+                        <div class="text-center text-gray-600">
+                            <p>Terjadi kesalahan saat memuat status pembayaran</p>
                         </div>
                     </div>
                 `;
-                document.getElementById('paymentForm').style.display = 'block';
             }
         }
 
-        async function handlePaymentSubmission(e) {
-            e.preventDefault();
-            const paymentProofFile = document.getElementById('paymentProofFile').files[0];
-            const paymentNotes = document.getElementById('paymentNotes').value;
-            const schoolName = schoolData.schoolName || '';
-            
-            if (!paymentProofFile) {
-                showToast('Harap pilih file bukti pembayaran!', 'error');
-                return;
-            }
-            
-            try {
-                // Show loading state
-                const submitBtn = document.getElementById('submitPaymentBtn');
-                const originalText = submitBtn.textContent;
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Mengunggah bukti pembayaran...';
-                
-                // Upload payment proof file
-                const paymentProofBase64 = await fileToBase64(paymentProofFile);
-                const paymentProofResponse = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
-                    body: JSON.stringify({
-                        action: 'uploadFile',
-                        username: currentUser,
-                        folderName: schoolName,
-                        fileName: `${schoolName}_BuktiPembayaran.${paymentProofFile.name.split('.').pop()}`,
-                        fileData: paymentProofBase64,
-                        mimeType: paymentProofFile.type
-                    })
-                });
-                
-                const paymentProofResult = await paymentProofResponse.json();
-                if (!paymentProofResult.success) {
-                    throw new Error('Gagal mengunggah bukti pembayaran');
-                }
-                
-                // Submit payment data
-                submitBtn.textContent = 'Menyimpan data pembayaran...';
-                
-                const formData = {
-                    action: 'submitPayment',
-                    username: currentUser,
-                    schoolName: schoolName,
-                    paymentProofLink: paymentProofResult.fileUrl,
-                    paymentNotes: paymentNotes,
-                    paymentStatus: 'pending' // Default status
-                };
-                
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
-                    body: JSON.stringify(formData)
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    showToast('Bukti pembayaran berhasil diupload! Status: Pending verifikasi', 'success');
-                    document.getElementById('paymentForm').reset();
-                    loadCurrentPaymentStatus(); // Reload status
-                    loadPaymentStatus(); // Update dashboard status
-                } else {
-                    showToast(result.message || 'Gagal mengupload bukti pembayaran!', 'error');
-                }
-                
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-                
-            } catch (error) {
-                showToast(error.message || 'Terjadi kesalahan saat mengupload bukti pembayaran', 'error');
-                const submitBtn = document.getElementById('submitPaymentBtn');
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Upload Bukti Pembayaran';
+        function getPaymentStatusText(status) {
+            switch(status) {
+                case 'belum_bayar': return 'Menunggu pembayaran';
+                case 'menunggu_verifikasi': return 'Pembayaran sedang diverifikasi';
+                case 'terverifikasi': return 'Pembayaran telah diverifikasi';
+                case 'ditolak': return 'Pembayaran ditolak - Silakan periksa kembali bukti transfer';
+                default: return 'Status tidak diketahui';
             }
         }
 
-        async function loadParticipants() {
-            const loadingDiv = document.getElementById('participantsLoading');
-            const emptyDiv = document.getElementById('participantsEmpty');
-            const listDiv = document.getElementById('participantsList');
-            
-            // Show loading state
-            loadingDiv.classList.remove('hidden');
-            emptyDiv.classList.add('hidden');
-            listDiv.classList.add('hidden');
-            
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
-                    body: JSON.stringify({
-                        action: 'getParticipants',
-                        username: currentUser
-                    })
-                });
-                
-                const result = await response.json();
-                
-                if (result.success && result.participants && result.participants.length > 0) {
-                    displayParticipants(result.participants);
-                    listDiv.classList.remove('hidden');
-                } else {
-                    emptyDiv.classList.remove('hidden');
-                }
-            } catch (error) {
-                showToast('Gagal memuat data peserta', 'error');
-                emptyDiv.classList.remove('hidden');
-            } finally {
-                loadingDiv.classList.add('hidden');
+        function getStatusColor(status) {
+            switch(status) {
+                case 'terverifikasi': return '#10b981';
+                case 'menunggu_verifikasi': return '#f59e0b';
+                case 'ditolak': return '#ef4444';
+                default: return '#6b7280';
             }
         }
 
-        function displayParticipants(participants) {
-            const listDiv = document.getElementById('participantsList');
-            listDiv.innerHTML = '';
-            
-            participants.forEach((participant, index) => {
-                const participantCard = document.createElement('div');
-                participantCard.className = 'glass-card rounded-xl p-6 card-hover';
-                
-                // Build additional info
-                let additionalInfo = `<p>🏫 ${participant.schoolName}</p>`;
-                if (participant.gender) {
-                    additionalInfo += `<p>${participant.gender === 'Laki-laki' ? '👨' : '👩'} ${participant.gender}</p>`;
-                }
-                if (participant.studentCardLink && participant.role !== 'pembina' && participant.role !== 'pelatih') {
-                    additionalInfo += `<p>🆔 <a href="${participant.studentCardLink}" target="_blank" class="text-blue-600 hover:underline">Lihat Kartu Pelajar</a></p>`;
-                }
-                if (participant.photoLink) {
-                    additionalInfo += `<p>📷 <a href="${participant.photoLink}" target="_blank" class="text-blue-600 hover:underline">Lihat Foto 3x4</a></p>`;
-                }
-                if (participant.medicalCondition) {
-                    additionalInfo += `<p>🏥 ${participant.medicalCondition}</p>`;
-                }
-
-                
-                participantCard.innerHTML = `
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                        <div class="flex-1">
-                            <div class="flex items-center gap-3 mb-2">
-                                <div class="text-2xl">${getRoleIcon(participant.role)}</div>
-                                <div>
-                                    <h3 class="text-lg font-bold text-gray-800">${participant.participantName}</h3>
-                                    <p class="text-sm text-gray-600">${participant.role}${participant.characterName ? ` - ${participant.characterName}` : ''}</p>
-                                </div>
-                            </div>
-                            <div class="text-sm text-gray-500">
-                                ${additionalInfo}
-                            </div>
-                        </div>
-                        <div class="flex gap-2">
-                            <button onclick="editParticipant(${index})" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold transition-all hover:transform hover:-translate-y-1">
-                                ✏️ Edit
-                            </button>
-                            <button onclick="deleteParticipant(${index})" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold transition-all hover:transform hover:-translate-y-1">
-                                🗑️ Hapus
-                            </button>
-                        </div>
-                    </div>
-                `;
-                listDiv.appendChild(participantCard);
-            });
-        }
-
-        function getRoleIcon(role) {
-            const icons = {
-                'aktor utama': '🎭',
-                'aktor pembantu': '🎭',
-                'aktris utama': '🎭',
-                'aktris pembantu': '🎭',
-                'penata music': '🎵',
-                'tim artistic': '🎨',
-                'sutradara': '🎬',
-                'pembina': '👨‍🏫',
-                'penata lampu': '💡',
-                'pubdok': '📢',
-                'stage manager': '🎪',
-                'pelatih': '🏃‍♂️'
-            };
-            return icons[role] || '👤';
-        }
-
-        let currentParticipants = [];
-
-        async function editParticipant(index) {
-            // Get current participants data
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
-                    body: JSON.stringify({
-                        action: 'getParticipants',
-                        username: currentUser
-                    })
-                });
-                
-                const result = await response.json();
-                if (result.success && result.participants) {
-                    currentParticipants = result.participants;
-                    const participant = currentParticipants[index];
-                    
-                    // Fill edit form
-                    document.getElementById('editParticipantId').value = index;
-                    document.getElementById('editParticipantName').value = participant.participantName;
-                    document.getElementById('editParticipantRole').value = participant.role;
-                    document.getElementById('editCharacterName').value = participant.characterName || '';
-                    document.getElementById('editGender').value = participant.gender || '';
-                    document.getElementById('editMedicalCondition').value = participant.medicalCondition || '';
-                    
-                    // Clear file inputs (they can't be pre-filled)
-                    document.getElementById('editStudentCardFile').value = '';
-                    document.getElementById('editPhotoFile').value = '';
-
-                    
-                    // Handle field visibility based on role
-                    handleEditRoleChange();
-                    
-                    // Show modal
-                    document.getElementById('editParticipantModal').classList.remove('hidden');
-                }
-            } catch (error) {
-                showToast('Gagal memuat data peserta', 'error');
+        function getStatusIcon(status) {
+            switch(status) {
+                case 'terverifikasi': return '✅';
+                case 'menunggu_verifikasi': return '⏳';
+                case 'ditolak': return '❌';
+                default: return '💰';
             }
         }
 
-        function handleEditRoleChange() {
-            const role = document.getElementById('editParticipantRole').value;
-            const characterNameDiv = document.getElementById('editCharacterNameDiv');
-            const commonFieldsDiv = document.getElementById('editCommonFieldsDiv');
-            const studentCardDiv = document.getElementById('editStudentCardDiv');
-            const studentCardInput = document.getElementById('editStudentCardFile');
-            
-            if (role) {
-                // Show common fields for all roles
-                commonFieldsDiv.classList.remove('hidden');
-                
-                if (role === 'aktor utama' || role === 'aktor pembantu' || role === 'aktris utama' || role === 'aktris pembantu') {
-                    // Show character name for actor/actress roles
-                    characterNameDiv.classList.remove('hidden');
-                    document.getElementById('editCharacterName').required = true;
-                    
-                    // Show student card for actor/actress roles
-                    studentCardDiv.classList.remove('hidden');
-                    document.getElementById('studentCardFile').required = true;
-                } else {
-                    // Hide character name for non-actor roles
-                    characterNameDiv.classList.add('hidden');
-                    document.getElementById('editCharacterName').required = false;
-                    document.getElementById('editCharacterName').value = '';
-                    
-                    // Check if role needs student card
-                    if (role === 'pembina' || role === 'pelatih') {
-                        // Hide student card for pembina and pelatih
-                        studentCardDiv.classList.add('hidden');
-                        document.getElementById('studentCardFile').required = false;
-                        document.getElementById('studentCardFile').value = '';
-                    } else {
-                        // Show student card for other roles
-                        studentCardDiv.classList.remove('hidden');
-                        document.getElementById('studentCardFile').required = true;
-                    }
-                }
-            } else {
-                // Hide all additional fields if no role selected
-                characterNameDiv.classList.add('hidden');
-                commonFieldsDiv.classList.add('hidden');
-                document.getElementById('editCharacterName').required = false;
-                studentCardInput.required = false;
+        function getStatusBadgeClass(status) {
+            switch(status) {
+                case 'terverifikasi': return 'bg-green-100 text-green-800';
+                case 'menunggu_verifikasi': return 'bg-yellow-100 text-yellow-800';
+                case 'ditolak': return 'bg-red-100 text-red-800';
+                default: return 'bg-gray-100 text-gray-800';
             }
         }
 
-        async function handleEditParticipant(e) {
-            e.preventDefault();
-            const index = parseInt(document.getElementById('editParticipantId').value);
-            const role = document.getElementById('editParticipantRole').value;
-            const participantName = document.getElementById('editParticipantName').value;
-            const schoolName = schoolData.schoolName || '';
-            
-            // Get files (optional for edit)
-            const studentCardFile = document.getElementById('editStudentCardFile').files[0];
-            const photoFile = document.getElementById('editPhotoFile').files[0];
-            
-            try {
-                // Show loading state
-                const submitBtn = e.target.querySelector('button[type="submit"]');
-                const originalText = submitBtn.textContent;
-                submitBtn.disabled = true;
-                
-                let studentCardLink = '';
-                let photoLink = '';
-                
-                // Upload new student card if provided
-                if (studentCardFile) {
-                    submitBtn.textContent = 'Mengunggah kartu pelajar...';
-                    const studentCardBase64 = await fileToBase64(studentCardFile);
-                    const studentCardResponse = await fetch(API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain;charset=utf-8'
-                        },
-                        body: JSON.stringify({
-                            action: 'uploadFile',
-                            username: currentUser,
-                            folderName: schoolName,
-                            fileName: `${schoolName}_${participantName}_KartuPelajar.${studentCardFile.name.split('.').pop()}`,
-                            fileData: studentCardBase64,
-                            mimeType: studentCardFile.type
-                        })
-                    });
-                    
-                    const studentCardResult = await studentCardResponse.json();
-                    if (!studentCardResult.success) {
-                        throw new Error('Gagal mengunggah kartu pelajar');
-                    }
-                    studentCardLink = studentCardResult.fileUrl;
-                }
-                
-                // Upload new photo if provided
-                if (photoFile) {
-                    submitBtn.textContent = 'Mengunggah foto...';
-                    const photoBase64 = await fileToBase64(photoFile);
-                    const photoResponse = await fetch(API_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain;charset=utf-8'
-                        },
-                        body: JSON.stringify({
-                            action: 'uploadFile',
-                            username: currentUser,
-                            folderName: schoolName,
-                            fileName: `${schoolName}_${participantName}_Foto.${photoFile.name.split('.').pop()}`,
-                            fileData: photoBase64,
-                            mimeType: photoFile.type
-                        })
-                    });
-                    
-                    const photoResult = await photoResponse.json();
-                    if (!photoResult.success) {
-                        throw new Error('Gagal mengunggah foto');
-                    }
-                    photoLink = photoResult.fileUrl;
-                }
-                
-                // Update participant data
-                submitBtn.textContent = 'Menyimpan data...';
-                
-                const formData = {
-                    action: 'editParticipant',
-                    username: currentUser,
-                    participantIndex: index,
-                    participantName: participantName,
-                    role: role,
-                    characterName: (role === 'aktor utama' || role === 'aktor pembantu' || role === 'aktris utama' || role === 'aktris pembantu') ? document.getElementById('editCharacterName').value : '',
-                    gender: document.getElementById('editGender').value,
-                    studentCardLink: studentCardLink, // Will be empty if no new file uploaded
-                    photoLink: photoLink, // Will be empty if no new file uploaded
-                    medicalCondition: document.getElementById('editMedicalCondition').value,
-                    updateFiles: studentCardFile || photoFile // Flag to indicate if files were updated
-                };
-                
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
-                    body: JSON.stringify(formData)
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    showToast('Data peserta berhasil diperbarui!', 'success');
-                    closeEditModal();
-                    loadParticipants(); // Reload the list
-                } else {
-                    showToast(result.message || 'Gagal memperbarui data peserta!', 'error');
-                }
-                
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-                
-            } catch (error) {
-                showToast(error.message || 'Terjadi kesalahan saat memperbarui data', 'error');
-                const submitBtn = e.target.querySelector('button[type="submit"]');
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Simpan';
+        function getStatusBadgeText(status) {
+            switch(status) {
+                case 'terverifikasi': return 'Terverifikasi';
+                case 'menunggu_verifikasi': return 'Menunggu Verifikasi';
+                case 'ditolak': return 'Ditolak';
+                default: return 'Belum Bayar';
             }
-        }
-
-        function closeEditModal() {
-            document.getElementById('editParticipantModal').classList.add('hidden');
-        }
-
-        async function deleteParticipant(index) {
-            // Get participant name for confirmation
-            let participantName = 'peserta ini';
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
-                    body: JSON.stringify({
-                        action: 'getParticipants',
-                        username: currentUser
-                    })
-                });
-                
-                const result = await response.json();
-                if (result.success && result.participants && result.participants[index]) {
-                    participantName = result.participants[index].participantName;
-                }
-            } catch (error) {
-                // Use default name if can't fetch
-            }
-            
-            if (!confirm(`Apakah Anda yakin ingin menghapus peserta "${participantName}"?\n\nData yang dihapus tidak dapat dikembalikan!`)) {
-                return;
-            }
-            
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
-                    body: JSON.stringify({
-                        action: 'deleteParticipant',
-                        username: currentUser,
-                        participantIndex: index
-                    })
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    showToast('Peserta berhasil dihapus!', 'success');
-                    loadParticipants(); // Reload the list
-                } else {
-                    showToast(result.message || 'Gagal menghapus peserta!', 'error');
-                }
-            } catch (error) {
-                showToast('Terjadi kesalahan saat menghapus peserta', 'error');
-            }
-        }
-
-        function loadSchoolData() {
-            if (schoolData.schoolName) {
-                document.getElementById('schoolName').value = schoolData.schoolName || '';
-                document.getElementById('sanggarName').value = schoolData.sanggarName || '';
-                document.getElementById('supervisorContact').value = schoolData.supervisorContact || '';
-                
-                // Note: File inputs cannot be pre-filled for security reasons
-                // Show message if data already exists
-                if (schoolData.scriptLink) {
-                    showToast('Data sekolah sudah ada. Unggah file baru untuk memperbarui.', 'info');
-                }
-            }
-        }
-
-        function handleLogout() {
-            currentUser = null;
-            schoolData = {};
-            localStorage.removeItem('currentUser');
-            localStorage.removeItem('userPassword'); // Hapus password saat logout
-            showSection('auth');
-            showToast('Berhasil logout', 'success');
-        }
-
-        function checkLoginStatus() {
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                currentUser = savedUser;
-                showSection('dashboard');
-            } else {
-                showSection('auth');
-            }
-        }
-
-        function showToast(message, type) {
-            const toast = document.getElementById('toast');
-            const toastIcon = document.getElementById('toastIcon');
-            const toastMessage = document.getElementById('toastMessage');
-            
-            // Set icon and message based on type
-            if (type === 'success') {
-                toastIcon.textContent = '✅';
-                toast.querySelector('.glass-card').classList.add('border-l-4', 'border-green-500');
-            } else if (type === 'info') {
-                toastIcon.textContent = 'ℹ️';
-                toast.querySelector('.glass-card').classList.add('border-l-4', 'border-blue-500');
-            } else {
-                toastIcon.textContent = '❌';
-                toast.querySelector('.glass-card').classList.add('border-l-4', 'border-red-500');
-            }
-            
-            toastMessage.textContent = message;
-            
-            // Show toast
-            toast.classList.remove('translate-x-full');
-            toast.classList.add('translate-x-0');
-            
-            // Hide toast after 4 seconds
-            setTimeout(() => {
-                toast.classList.remove('translate-x-0');
-                toast.classList.add('translate-x-full');
-                
-                // Clean up classes
-                setTimeout(() => {
-                    toast.querySelector('.glass-card').classList.remove('border-l-4', 'border-green-500', 'border-red-500', 'border-blue-500');
-                }, 300);
-            }, 4000);
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9774c45a96c7d899',t:'MTc1NjU2MTkzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
